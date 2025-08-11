@@ -1,0 +1,48 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+
+ll = LinkedList()
+ll.head = Node(1)
+ll.head.next = Node(2)
+ll.head.next.next = Node(3)
+ll.head.next.next.next = Node(4)
+
+ points to second node
+ll.head.next.next.next.next = ll.head.next
+
+slow = ll.head
+fast = ll.head
+loop_found = False
+
+while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+    if slow == fast:
+        loop_found = True
+        break
+
+if loop_found:
+    slow = ll.head
+    prev = None
+    while slow != fast:
+        prev = fast
+        slow = slow.next
+        fast = fast.next
+    prev.next = None  # break the loop
+    print("Loop removed")
+else:
+    print("No loop found")
+
+
+temp = ll.head
+while temp:
+    print(temp.data, end=" -> ")
+    temp = temp.next
+print("None")
