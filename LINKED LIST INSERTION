@@ -1,0 +1,32 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_head(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def insert_at_position(self, data, pos):
+        if pos == 0:
+            return self.insert_at_head(data)
+        new = Node(data)
+        curr = self.head
+        for _ in range(pos - 1):
+            if curr is None:
+                raise IndexError("Position out of bounds")
+            curr = curr.next
+        new.next = curr.next
+        curr.next = new
+
+    def print_list(self):
+        curr = self.head
+        while curr:
+            print(curr.data, end=" -> ")
+            curr = curr.next
+        print("None")
